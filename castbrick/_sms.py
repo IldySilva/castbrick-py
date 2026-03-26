@@ -28,9 +28,6 @@ class SmsResource:
             body["contactListId"] = contact_list_id
         return SendSmsResponse._from_dict(self._c.post("/sms/send", body))
 
-    def get(self, id: str) -> SmsMessage:
-        return SmsMessage._from_dict(self._c.get(f"/sms/{id}"))
-
     def list(self, page: int = 1, page_size: int = 20) -> PagedResult[SmsMessage]:
         return PagedResult._from_dict(
             self._c.get(f"/sms?pageNumber={page}&pageSize={page_size}"),

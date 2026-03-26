@@ -4,7 +4,7 @@ build-backend = "setuptools.backends.legacy:build"
 
 [project]
 name = "castbrick"
-version = "0.1.1"
+version = "0.1.2"
 description = "Official Python SDK for the CastBrick API — SMS, Contacts and Broadcasts."
 readme = "README.md"
 license = { text = "MIT" }

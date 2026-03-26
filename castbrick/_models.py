@@ -50,11 +50,16 @@ class SendSmsResponse:
 @dataclass
 class SmsMessage:
     id: str
-    phone_number: str
+    recipient_phone: str
     message: str
     status: str
-    tenant_id: str
-    created_at: str
+    retry_count: int
+    contact_name: Optional[str] = None
+    campaign_name: Optional[str] = None
+    campaign_id: Optional[str] = None
+    sender_id: Optional[str] = None
+    error_message: Optional[str] = None
+    scheduled_at: Optional[str] = None
     sent_at: Optional[str] = None
     delivered_at: Optional[str] = None
 
@@ -62,11 +67,16 @@ class SmsMessage:
     def _from_dict(cls, d: dict) -> "SmsMessage":
         return cls(
             id=d["id"],
-            phone_number=d["phoneNumber"],
+            recipient_phone=d["recipientPhone"],
             message=d["message"],
             status=d["status"],
-            tenant_id=d["tenantId"],
-            created_at=d["createdAt"],
+            retry_count=d.get("retryCount", 0),
+            contact_name=d.get("contactName"),
+            campaign_name=d.get("campaignName"),
+            campaign_id=d.get("campaignId"),
+            sender_id=d.get("senderId"),
+            error_message=d.get("errorMessage"),
+            scheduled_at=d.get("scheduledAt"),
             sent_at=d.get("sentAt"),
             delivered_at=d.get("deliveredAt"),
         )
