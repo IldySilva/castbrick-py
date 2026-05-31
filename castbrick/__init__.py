@@ -25,7 +25,7 @@ __all__ = [
     "SmsMessage",
 ]
 
-_DEFAULT_BASE_URL = "https://api.castbrick.co/v1"
+_DEFAULT_BASE_URL = "https://api.castbrick.co"
 
 
 class CastBrick:

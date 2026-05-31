@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Generic, List, Optional, TypeVar
 
 T = TypeVar("T")

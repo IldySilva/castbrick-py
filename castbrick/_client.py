@@ -3,7 +3,8 @@ from __future__ import annotations
 import json
 import urllib.request
 import urllib.error
-from typing import Any
+import urllib.parse
+from typing import Any, Optional
 
 
 class CastBrickApiError(Exception):
@@ -39,7 +40,11 @@ class _Client:
             body = e.read().decode(errors="replace")
             raise CastBrickApiError(e.code, body) from e
 
-    def get(self, path: str) -> Any:
+    def get(self, path: str, params: Optional[dict] = None) -> Any:
+        if params:
+            filtered = {k: str(v) for k, v in params.items() if v is not None}
+            if filtered:
+                path = path + "?" + urllib.parse.urlencode(filtered)
         return self._request("GET", path)
 
     def post(self, path: str, body: Any = None) -> Any:
