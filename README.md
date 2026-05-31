@@ -32,19 +32,23 @@ print(result.message_id, result.status)
 result = cb.sms.send(
     to=["+244923000000", "+244912000000"],
     content="Your OTP is 1234",
-    sender_id="MyApp",                          # optional
-    scheduled_at="2026-11-28T09:00:00Z",        # optional
+    sender_id="MyApp",                    # optional — your approved Sender ID
+    scheduled_at="2026-11-28T09:00:00Z",  # optional — schedule for later
+    fallback=True,                        # optional — fall back to CastBrick sender if senderId unavailable
 )
 
-# Get
-msg = cb.sms.get("message-id")
-print(msg.status)
-
-# List
-page = cb.sms.list(page=1, page_size=20)
+# List (with optional filters)
+page = cb.sms.list(
+    page=1,
+    page_size=20,
+    status="delivered",           # pending | sent | delivered | failed | scheduled
+    phone="+244923000000",
+    from_date="2026-01-01T00:00:00Z",
+    to_date="2026-06-01T00:00:00Z",
+)
 print(page.total_count)
 
-# Cancel scheduled
+# Cancel a scheduled SMS
 cb.sms.cancel_scheduled("message-id")
 ```
 
@@ -57,24 +61,23 @@ page = cb.contacts.list(search="joão")
 # Get
 contact = cb.contacts.get("contact-id")
 
-# Create (comma-separated phone numbers or emails)
-cb.contacts.create(phone_numbers="+244923000000,+244912000000")
-cb.contacts.create(emails="alice@example.com")
+# Create — comma or newline-separated phone numbers
+cb.contacts.create(phone_numbers="+244923000000\n+244912000000")
 
 # Delete
 cb.contacts.delete("contact-id")
 
 # Contact lists
-lst = cb.contacts.create_list("VIP Customers")
-cb.contacts.add_to_list(lst.id, contact.id)
-cb.contacts.remove_from_list(lst.id, contact.id)
+list_id = cb.contacts.create_list("VIP Customers")  # returns the new list ID (str)
+cb.contacts.add_to_list(list_id, contact.id)
+cb.contacts.remove_from_list(list_id, contact.id)
 ```
 
 ## Broadcasts
 
 ```python
 # Create
-id = cb.broadcasts.create(
+broadcast_id = cb.broadcasts.create(
     name="Black Friday",
     message="50% off everything today!",
     contact_list_id="list-id",  # optional
@@ -82,20 +85,20 @@ id = cb.broadcasts.create(
 )
 
 # Send immediately
-cb.broadcasts.send(id)
+cb.broadcasts.send(broadcast_id)
 
 # Update with schedule
 cb.broadcasts.update(
-    id,
+    broadcast_id,
     name="Black Friday",
     message="50% off everything today!",
     schedule_at="2026-11-28T09:00:00Z",
 )
 
 # Other operations
-cb.broadcasts.cancel(id)
-new_id = cb.broadcasts.duplicate(id)
-cb.broadcasts.delete(id)
+cb.broadcasts.cancel(broadcast_id)
+new_id = cb.broadcasts.duplicate(broadcast_id)
+cb.broadcasts.delete(broadcast_id)
 ```
 
 ## Error handling
@@ -110,14 +113,6 @@ except CastBrickApiError as e:
     # 401 → invalid or revoked API key
     # 402 → insufficient credits
     # 422 → validation error
-```
-
-## Publishing
-
-```bash
-pip install build twine
-python -m build
-twine upload dist/*
 ```
 
 ## License
