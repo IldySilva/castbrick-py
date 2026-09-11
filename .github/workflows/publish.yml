@@ -23,6 +23,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
+    environment: release
     permissions:
       id-token: write  # Necessary for OIDC trusted publishing
     
