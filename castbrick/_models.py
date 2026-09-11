@@ -149,3 +149,186 @@ class Broadcast:
             contact_list_id=d.get("contactListId"),
             scheduled_at=d.get("scheduledAt"),
         )
+
+
+# ── Templates ────────────────────────────────────────────────────────────────
+
+@dataclass
+class Template:
+    id: str
+    name: str
+    content: str
+    created_at: str
+    subject: Optional[str] = None
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "Template":
+        return cls(
+            id=d["id"],
+            name=d["name"],
+            content=d["content"],
+            created_at=d["createdAt"],
+            subject=d.get("subject"),
+        )
+
+
+# ── Webhooks ─────────────────────────────────────────────────────────────────
+
+@dataclass
+class Webhook:
+    id: str
+    endpoint: str
+    event_type: str
+    is_active: bool
+    created_at: str
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "Webhook":
+        return cls(
+            id=d["id"],
+            endpoint=d["endpoint"],
+            event_type=d["eventType"],
+            is_active=d["isActive"],
+            created_at=d["createdAt"],
+        )
+
+
+@dataclass
+class WebhookLog:
+    id: str
+    webhook_id: str
+    event_type: str
+    status_code: int
+    attempt: int
+    delivered_at: str
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "WebhookLog":
+        return cls(
+            id=d["id"],
+            webhook_id=d["webhookId"],
+            event_type=d["eventType"],
+            status_code=d["statusCode"],
+            attempt=d["attempt"],
+            delivered_at=d["deliveredAt"],
+        )
+
+
+# ── Segments ─────────────────────────────────────────────────────────────────
+
+@dataclass
+class Segment:
+    id: str
+    name: str
+    contact_count: int
+    created_at: str
+    description: Optional[str] = None
+    rules_operator: Optional[str] = None
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "Segment":
+        return cls(
+            id=d["id"],
+            name=d["name"],
+            contact_count=d["contactCount"],
+            created_at=d["createdAt"],
+            description=d.get("description"),
+            rules_operator=d.get("rulesOperator"),
+        )
+
+
+# ── Billing ──────────────────────────────────────────────────────────────────
+
+@dataclass
+class BillingBalance:
+    balance: float
+    low_balance_threshold: float
+    alert_email: str
+    last_alert_sent_at: Optional[str] = None
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "BillingBalance":
+        return cls(
+            balance=d["balance"],
+            low_balance_threshold=d["lowBalanceThreshold"],
+            alert_email=d["alertEmail"],
+            last_alert_sent_at=d.get("lastAlertSentAt"),
+        )
+
+
+@dataclass
+class CreditPack:
+    id: str
+    name: str
+    credits: int
+    price: float
+    currency: str
+    price_per_sms: float
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "CreditPack":
+        return cls(
+            id=d["id"],
+            name=d["name"],
+            credits=d["credits"],
+            price=d["price"],
+            currency=d["currency"],
+            price_per_sms=d["pricePerSms"],
+        )
+
+
+@dataclass
+class InitiatePaymentResponse:
+    payment_url: str
+    provider_ref: str
+    payment_id: str
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "InitiatePaymentResponse":
+        return cls(
+            payment_url=d["paymentUrl"],
+            provider_ref=d["providerRef"],
+            payment_id=d["paymentId"],
+        )
+
+
+@dataclass
+class PaymentInfo:
+    id: str
+    amount: float
+    currency: str
+    status: str
+    provider_ref: str
+    credits_granted: int
+    created_at: str
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "PaymentInfo":
+        return cls(
+            id=d["id"],
+            amount=d["amount"],
+            currency=d["currency"],
+            status=d["status"],
+            provider_ref=d["providerRef"],
+            credits_granted=d["creditsGranted"],
+            created_at=d["createdAt"],
+        )
+
+
+@dataclass
+class CreditLedgerEntry:
+    id: str
+    amount: float
+    type: str
+    description: str
+    created_at: str
+
+    @classmethod
+    def _from_dict(cls, d: dict) -> "CreditLedgerEntry":
+        return cls(
+            id=d["id"],
+            amount=d["amount"],
+            type=d["type"],
+            description=d["description"],
+            created_at=d["createdAt"],
+        )

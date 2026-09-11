@@ -1,6 +1,6 @@
 # castbrick
 
-Official Python SDK for the [CastBrick](https://castbrick.com) API — send SMS, manage contacts and run broadcasts.
+Official Python SDK for the [CastBrick](https://castbrick.co) API — send SMS, manage contacts and run broadcasts.
 
 Zero dependencies. Works with Python 3.8+.
 
@@ -99,6 +99,31 @@ cb.broadcasts.update(
 cb.broadcasts.cancel(broadcast_id)
 new_id = cb.broadcasts.duplicate(broadcast_id)
 cb.broadcasts.delete(broadcast_id)
+```
+
+## Billing
+
+```python
+# Get current credit balance
+balance = cb.billing.get_balance()
+
+# List available credit packages
+packages = cb.billing.list_packages()
+
+# List credit consumption/transaction history
+history = cb.billing.list_transactions()
+```
+
+## Segments, Templates & Webhooks
+
+The SDK also provides native access to `cb.segments`, `cb.templates`, and `cb.webhooks`.
+
+```python
+# Example: Create a Webhook
+cb.webhooks.create(
+    url="https://yourapp.com/webhooks/castbrick",
+    events=["sms.delivered", "sms.failed"]
+)
 ```
 
 ## Error handling

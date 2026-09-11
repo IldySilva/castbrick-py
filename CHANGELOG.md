@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.2.0 — 2026-07-18
+
+### New Features
+- Added support for `Billing` API (`castbrick.billing`)
+- Added support for `Segments` API (`castbrick.segments`)
+- Added support for `Templates` API (`castbrick.templates`)
+- Added support for `Webhooks` API (`castbrick.webhooks`)
+
+---
+
 ## 0.1.3 — 2026-06-01
 
 ### Bug Fixes

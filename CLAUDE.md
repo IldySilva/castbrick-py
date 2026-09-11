@@ -12,7 +12,7 @@ pip install -e .         # install locally for testing
 
 ## Version
 
-Current: `0.1.3` — bump in `pyproject.toml` before releasing.
+Current: `0.2.0` — bump in `pyproject.toml` before releasing.
 
 ## Source files
 
@@ -23,7 +23,11 @@ castbrick/
 ├── _models.py      # Dataclasses for all types
 ├── _sms.py         # SmsResource
 ├── _contacts.py    # ContactsResource
-└── _broadcasts.py  # BroadcastsResource
+├── _broadcasts.py  # BroadcastsResource
+├── _billing.py     # BillingResource
+├── _segments.py    # SegmentsResource
+├── _templates.py   # TemplatesResource
+└── _webhooks.py    # WebhooksResource
 ```
 
 ## API base URL

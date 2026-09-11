@@ -8,10 +8,23 @@ from ._models import (
     PagedResult,
     SendSmsResponse,
     SmsMessage,
+    BillingBalance,
+    CreditPack,
+    InitiatePaymentResponse,
+    PaymentInfo,
+    CreditLedgerEntry,
+    Segment,
+    Template,
+    Webhook,
+    WebhookLog,
 )
 from ._sms import SmsResource
 from ._contacts import ContactsResource
 from ._broadcasts import BroadcastsResource
+from ._billing import BillingResource
+from ._segments import SegmentsResource
+from ._templates import TemplatesResource
+from ._webhooks import WebhooksResource
 from ._client import _Client
 
 __all__ = [
@@ -23,9 +36,18 @@ __all__ = [
     "PagedResult",
     "SendSmsResponse",
     "SmsMessage",
+    "BillingBalance",
+    "CreditPack",
+    "InitiatePaymentResponse",
+    "PaymentInfo",
+    "CreditLedgerEntry",
+    "Segment",
+    "Template",
+    "Webhook",
+    "WebhookLog",
 ]
 
-_DEFAULT_BASE_URL = "https://api.castbrick.co"
+_DEFAULT_BASE_URL = "https://api.castbrick.co/v1"
 
 
 class CastBrick:
@@ -42,3 +64,7 @@ class CastBrick:
         self.sms = SmsResource(client)
         self.contacts = ContactsResource(client)
         self.broadcasts = BroadcastsResource(client)
+        self.billing = BillingResource(client)
+        self.segments = SegmentsResource(client)
+        self.templates = TemplatesResource(client)
+        self.webhooks = WebhooksResource(client)
