@@ -25,6 +25,7 @@ class _Client:
         headers = {
             "Authorization": f"Bearer {self._api_key}",
             "Accept": "application/json",
+            "User-Agent": "castbrick-python/0.2.4",
         }
         if data is not None:
             headers["Content-Type"] = "application/json"

@@ -3,6 +3,7 @@
 ## 0.2.4 — 2026-10-20
 
 ### Bug Fixes
+- Added `User-Agent: castbrick-python/0.2.4` header to prevent Cloudflare WAF Error 1010 from blocking default `Python-urllib` signatures.
 - Fixed missing module files (`_billing.py`, `_segments.py`, `_templates.py`, `_webhooks.py`) in published PyPI package caused by `.gitignore` wildcard.
 - Added `from __future__ import annotations` and fixed `list` method shadowing for Python 3.8-3.14 compatibility.
 

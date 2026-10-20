@@ -27,7 +27,10 @@ from ._templates import TemplatesResource
 from ._webhooks import WebhooksResource
 from ._client import _Client
 
+__version__ = "0.2.4"
+
 __all__ = [
+    "__version__",
     "CastBrick",
     "CastBrickApiError",
     "Broadcast",
