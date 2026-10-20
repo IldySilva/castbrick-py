@@ -1,2 +1,14 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
-*
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+bin/
+lib/
+include/
+pyvenv.cfg
+.env
+.DS_Store

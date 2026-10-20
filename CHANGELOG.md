@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4 — 2026-10-20
+
+### Bug Fixes
+- Fixed missing module files (`_billing.py`, `_segments.py`, `_templates.py`, `_webhooks.py`) in published PyPI package caused by `.gitignore` wildcard.
+- Added `from __future__ import annotations` and fixed `list` method shadowing for Python 3.8-3.14 compatibility.
+
 ## 0.2.0 — 2026-07-18
 
 ### New Features
